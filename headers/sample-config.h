@@ -1,8 +1,12 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
-/*  Data Layer Constants */
+/*  Data Layer Constants 
+ * Note we use ifndef so that tests may modify as appropriate
+*/
+#ifndef DATA_DIR
 #define DATA_DIR "/home/guest/bgi/data/"
+#endif
 #define DATA_DIR_PERM 0755 
 #define USERS_INDEX ".users"
 #define BUFFER_LENGTH 1024
