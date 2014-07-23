@@ -1,3 +1,13 @@
+#ifndef __DATA_H__
+#define __DATA_H__
+
+#include <sys/stat.h>
+#include <stdlib.h>
+#include <dirent.h>
+#include <errno.h>
+#include "base.h"
+#include "config.h"
+
 /* Checks if a directory exists
  * Returns -1 on err, 0 on failure, and 1 on success
 */
@@ -32,3 +42,5 @@ int create_users_file();
  * Returns 1 on sucess or 0 on failture
 */
 int pci_init();
+
+#endif

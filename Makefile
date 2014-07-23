@@ -4,7 +4,7 @@ CFLAGS = -std=gnu99 -pedantic -Wall -Wextra -Werror -g -I./headers
 LINKFLAGS = $(CFLAGS)
 LIBS = lib/wolkykim-qdecoder-63888fc/src/libqdecoder.a
 
-INTERNAL = fasthash
+INTERNAL = fasthash data
 
 #Use Phony to keep clean
 .PHONY: clean 
@@ -20,7 +20,7 @@ all: ${TARGETS}
 $(TARGETS): $(OBJECTS) $(INTERNAL)
 	${CC} ${LINKFLAGS} -o $@ $(patsubst bin/%.cgi, obj/%.o, $@ ) $(patsubst %, obj/%.o, $(INTERNAL)) ${LIBS}
 
-$(INTERNAL):
+$(INTERNAL): 
 	${CC} ${CFLAGS} -c src/internal/$@.c -o obj/$@.o 
 
 clean:

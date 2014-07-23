@@ -1,3 +1,5 @@
+#include "internal/data.h"
+
 /* Code to handle low level data manipulation of files and file contents*/
 
 int directory_exists(const char * directoryToCheck){
@@ -16,7 +18,7 @@ int directory_exists(const char * directoryToCheck){
 
 
 int directory_create(const char * directoryToCheck){
-	return mkdir(directoryToCheck, DIR_PERM);
+	return mkdir(directoryToCheck, DATA_DIR_PERM);
 }
 
 int file_exists(const char * filename){
@@ -58,7 +60,7 @@ int create_users_file(){
 
 	int userFileExists = file_exists(DATA_DIR USERS_INDEX);
 	if(userFileExists == 0){
-		FILE *fp = fopen(DATA_DIR USERS_INDEX);
+		FILE *fp = fopen(DATA_DIR USERS_INDEX, "w");
 		if(!fp){
 			userFileExists = 0;
 			fprintf(stderr,"%s\n", FAILED_INIT FAILED_FILE_CREATION);
