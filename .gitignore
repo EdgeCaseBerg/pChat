@@ -1,0 +1,15 @@
+#Ignore compiled binary
+*.out
+*.cgi
+
+#Ignore object files
+*.o
+
+#Ignore vim swap files
+*.swp
+
+#Ignore configuration files
+headers/config.h
+
+#ignore the PCI Data directory
+data
