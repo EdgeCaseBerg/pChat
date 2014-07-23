@@ -4,7 +4,7 @@ CFLAGS = -std=gnu99 -pedantic -Wall -Wextra -Werror -g -I./headers
 LINKFLAGS = $(CFLAGS)
 LIBS = lib/wolkykim-qdecoder-63888fc/src/libqdecoder.a
 
-UTIL = fasthash
+INTERNAL = fasthash
 
 #Use Phony to keep clean
 .PHONY: clean 
@@ -17,11 +17,11 @@ valgrind = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-
 
 all: ${TARGETS}
 
-	$(TARGETS): $(OBJECTS) $(UTIL)
-	${CC} ${LINKFLAGS} -o $@ $(patsubst bin/%.cgi, obj/%.o, $@ ) $(patsubst %, obj/%.o, $(UTIL)) ${LIBS}
+$(TARGETS): $(OBJECTS) $(INTERNAL)
+	${CC} ${LINKFLAGS} -o $@ $(patsubst bin/%.cgi, obj/%.o, $@ ) $(patsubst %, obj/%.o, $(INTERNAL)) ${LIBS}
 
-$(UTIL):
-	${CC} ${CFLAGS} -c src/util/$@.c -o obj/$@.o 
+$(INTERNAL):
+	${CC} ${CFLAGS} -c src/internal/$@.c -o obj/$@.o 
 
 clean:
 	rm -f obj/*.o ${TARGETS}
