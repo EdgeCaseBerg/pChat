@@ -1,10 +1,6 @@
-<form action="/pci/reply.cgi" method="POST">
-	<textarea required="required" placeholder="Start typing your message" name="message"></textarea>
-	<div>
-		<input type="submit" value="Message" />
-		<select name="user" required="required">
-			<option disabled selected style='display:none;'>Choose Recipient</option><!-- Populated By JS. Filter out the logged in users name --></select>
-	</div>
-</form>
-
-<div id="history"></div>
+<p>
+	Please login into the System using the form below
+</p>
+<div>
+<%- partial('_partials/login-form') %>
+</div>
