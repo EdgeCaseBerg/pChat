@@ -4,9 +4,8 @@
 /*  Data Layer Constants 
  * Note we use ifndef so that tests may modify as appropriate
 */
-#undef DATA_DIR
 #ifndef DATA_DIR
-#define DATA_DIR "/tmp/data-test/"
+#define DATA_DIR "/tmp/datatest/"
 #endif
 #define DATA_DIR_PERM 0755 
 #define USERS_INDEX ".users"

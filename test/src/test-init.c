@@ -1,5 +1,4 @@
 #include "testp.h"
-#include "test-config.h"
 
 int main(){
 	pci_init();
