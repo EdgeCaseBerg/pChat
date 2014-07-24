@@ -17,7 +17,7 @@ valgrind = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-
 
 all: ${TARGETS} 
 
-$(TARGETS): copyobjects $(OBJECTS)
+$(TARGETS): copyobjects $(OBJECTS) ../headers/config.h
 	${CC} ${LINKFLAGS} -g -o $@ $(patsubst bin/%.out, obj/%.o, $@ ) $(INTERNAL) ${LIBS}
 
 clean:
@@ -25,18 +25,17 @@ clean:
 	rm -f ../obj/*.o
 
 copyobjects:
-	-mv ../headers/config.h ../headers/config.h.bak
-	-mv ../headers/test-config.h ../headers/config.h
 	rm -f obj/*.o 
 	cd ../ && make clean all && cd test
 	cp ../obj/*.o obj/
-	-mv ../headers/config.h ../headers/test-config.h
-	-mv ../headers/config.h.bak ../headers/config.h
 
-$(OBJECTS): obj/%.o : src/%.c
+$(OBJECTS): obj/%.o : src/%.c ../headers/config.h
 	${CC} ${CFLAGS} -c -o $@ $<
 
 test: $(TARGETS)
+	-@mv ../headers/config.h ../headers/config.h.bak
+	-@mv ../headers/test-config.h ../headers/config.h
 	-@rm /tmp/data-test || true #remove any test data created so far
 	$(valgrind) ./$<
-	
+	-@mv ../headers/config.h ../headers/test-config.h
+	-@mv ../headers/config.h.bak ../headers/config.h

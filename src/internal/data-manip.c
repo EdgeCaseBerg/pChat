@@ -1,4 +1,5 @@
 #include "internal/data-manip.h"
+#include "config.h"
 
 /* Code to handle low level data manipulation of files and file contents*/
 

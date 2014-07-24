@@ -2,9 +2,9 @@
 #define __TEST_H__
 
 /* Set the Data Directory to the test Directory */
-#undef DATA_DIR
 #define DATA_DIR "/tmp/data-test/"
 #include "base.h"
+#include "config.h"
 #include <assert.h>
 
 #endif
