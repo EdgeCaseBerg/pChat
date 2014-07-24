@@ -1,5 +1,5 @@
-#ifndef __CONFIG_H__
-#define __CONFIG_H__
+#ifndef __TEST_CONFIG_H__
+#define __TEST_CONFIG_H__
 
 /*  Data Layer Constants 
  * Note we use ifndef so that tests may modify as appropriate

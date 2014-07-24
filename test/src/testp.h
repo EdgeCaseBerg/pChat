@@ -4,7 +4,7 @@
 /* Set the Data Directory to the test Directory */
 #undef DATA_DIR
 #define DATA_DIR "/tmp/data-test/"
-#include "test-config.h"
+#include "testp.h"
 #include "base.h"
 #include <assert.h>
 
