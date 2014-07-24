@@ -5,7 +5,7 @@
  * Note we use ifndef so that tests may modify as appropriate
 */
 #ifndef DATA_DIR
-#define DATA_DIR "/tmp/datatest/"
+#define DATA_DIR "/tmp/data-test/"
 #endif
 #define DATA_DIR_PERM 0755 
 #define USERS_INDEX ".users"

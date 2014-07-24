@@ -28,7 +28,7 @@ copyobjects:
 	-mv ../headers/config.h ../headers/config.h.bak
 	-mv ../headers/test-config.h ../headers/config.h
 	rm -f obj/*.o 
-	cd ../ && make && cd test
+	cd ../ && make clean all && cd test
 	cp ../obj/*.o obj/
 	-mv ../headers/config.h ../headers/test-config.h
 	-mv ../headers/config.h.bak ../headers/config.h
