@@ -13,18 +13,25 @@ INTERNAL := $(patsubst src/internal/%.c,obj/%.o,$(wildcard ../src/internal/*.c))
 #Commands to help test and run programs:	
 valgrind = valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes
 
-all: copyobjects ${TARGETS} 
+.PHONY: clean 
 
-$(TARGETS): $(OBJECTS) ../obj/*.o
+all: ${TARGETS} 
+
+$(TARGETS): copyobjects $(OBJECTS)
 	${CC} ${LINKFLAGS} -g -o $@ $(patsubst bin/%.out, obj/%.o, $@ ) $(INTERNAL) ${LIBS}
 
 clean:
 	rm -f obj/*.o ${TARGETS}
+	rm -f ../obj/*.o
 
 copyobjects:
+	-mv ../headers/config.h ../headers/config.h.bak
+	-mv ../headers/test-config.h ../headers/config.h
 	rm -f obj/*.o 
 	cd ../ && make && cd test
 	cp ../obj/*.o obj/
+	-mv ../headers/config.h ../headers/test-config.h
+	-mv ../headers/config.h.bak ../headers/config.h
 
 $(OBJECTS): obj/%.o : src/%.c
 	${CC} ${CFLAGS} -c -o $@ $<
@@ -32,3 +39,4 @@ $(OBJECTS): obj/%.o : src/%.c
 test: $(TARGETS)
 	-@rm /tmp/data-test || true #remove any test data created so far
 	$(valgrind) ./$<
+	
