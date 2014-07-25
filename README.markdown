@@ -85,6 +85,44 @@ definition pointing to`127.0.0.1`
  - C
  - HTML/JS/CSS
 
+**General Outline of Code**
+
+#####CGI:
+<hr>
+#####internal:
+
+    data.c -> routines to handle data processing such as:
+     - Open and Create Files
+     - Open and Create Directories
+     - Check last modified times of files
+    
+    user.c -> routines to handle user creation and registration
+     - Create a user
+     - Check for existence of a user
+    
+    message.c -> routes to handle conversations
+     - Create a conversation between 2 users
+     - Update a conversation between 2 users
+     - High level check if message has been updated since X
+    
+#####external:
+
+    create-user.c -> cgi script to handle POST to create account
+    list-user.c -> cgi script to list users for message selection
+    reply.c -> cgi script to update or create a conversation between users
+    login.c
+    register.c
+
+#####Static:
+<hr>
+#####Website:
+
+	index -> login or register links
+	login -> login to the system
+	register -> register a user on the system
+	talk -> have a conversation with someone
+
+	... more to come (js)
 
 [qdecoder]:http://www.qdecoder.org/wiki/qdecoder
 [listed here]:http://cgi.resourceindex.com/programs_and_scripts/c_and_c++/libraries_and_classes/
