@@ -24,7 +24,7 @@ $(TARGETS): $(OBJECTS) $(INTERNAL)
 $(INTERNAL): ./headers/config.h
 	${CC} ${CFLAGS} -c src/internal/$@.c -o obj/$@.o 
 
-clean:
+clean: ./headers/config.h
 	rm -f obj/*.o ${TARGETS}
 
 $(OBJECTS): obj/%.o : src/%.c ./headers/config.h
