@@ -15,6 +15,7 @@
 #include "urls.h"
 
 #include "internal/data-manip.h"
+#include "internal/user.h"
 
 /* Help Macro! CAll TOSTR on it!*/
 #define TOSTR(x) STRINGIFY(x)

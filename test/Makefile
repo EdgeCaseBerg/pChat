@@ -36,6 +36,6 @@ test: $(TARGETS)
 	-@mv ../headers/config.h ../headers/config.h.bak
 	-@mv ../headers/test-config.h ../headers/config.h
 	-@rm /tmp/data-test || true #remove any test data created so far
-	$(valgrind) ./$<
+	-$(valgrind) ./$< #ignore error so that we place config back
 	-@mv ../headers/config.h ../headers/test-config.h
 	-@mv ../headers/config.h.bak ../headers/config.h
