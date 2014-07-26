@@ -5,7 +5,7 @@ int createConversation(const char * userA, const char * userB){
 	if(order == 0) return 0; //You can't talk to yourself.
 
 	char buffer[(BUFFER_LENGTH*3) + strlen(DATA_DIR)]; //*3 for safety
-	bzero(buffer);
+	bzero(buffer, sizeof(buffer));
 	if(order < 1){
 		snprintf(buffer, sizeof(buffer), "%s%s-%s", DATA_DIR, userA, userB);
 	}else{
@@ -27,7 +27,7 @@ int createConversation(const char * userA, const char * userB){
 
 	/* Conversation Directory Exists, Order conversations by time */
 	char timeBuffer[BUFFER_LENGTH];
-	bzero(timeBuffer);
+	bzero(timeBuffer, sizeof(timeBuffer));
 
 	/* pretty much exactly from strftime's man page: */
 	time_t t;

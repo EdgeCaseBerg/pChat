@@ -16,6 +16,7 @@
 
 #include "internal/data-manip.h"
 #include "internal/user.h"
+#include "internal/message.h"
 
 /* Help Macro! CAll TOSTR on it!*/
 #define TOSTR(x) STRINGIFY(x)
