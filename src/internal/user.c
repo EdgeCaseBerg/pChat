@@ -29,9 +29,9 @@ int user_exists(const char * username){
 		return 0;	
 	}
 
-	char user[64];
-	while(fscanf(fp, "%64s\r\n", user) == 1){
-		if(strncmp(user, username,  63) == 0){
+	char user[BUFFER_LENGTH];
+	while(fscanf(fp, "%" TOSTR(BUFFER_LENGTH) "s\r\n", user) == 1){
+		if(strncmp(user, username,  BUFFER_LENGTH-1) == 0){
 			fclose(fp);
 			return 1;
 		}

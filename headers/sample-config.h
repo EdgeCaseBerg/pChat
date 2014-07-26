@@ -9,7 +9,7 @@
 #endif
 #define DATA_DIR_PERM 0755 
 #define USERS_INDEX ".users"
-#define BUFFER_LENGTH 1024
+#define BUFFER_LENGTH 64
 
 /*  CGI Layer Constants */
 #define SESSION_TIME 3600 /* Hour */
