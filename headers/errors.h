@@ -10,6 +10,8 @@
 #define FAILED_FILE_OPEN "Could not open file: "
 #define OUT_OF_MEMORY "Out of Memory: "
 
+#define FAILED_CONVERSATION_RETRIEVAL "Could not retrieve conversation for "
+
 
 
 
