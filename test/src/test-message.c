@@ -19,7 +19,7 @@ int main(){
 
 	char buffer[512];
 	bzero(buffer, sizeof(buffer));
-	strftime(buffer, sizeof(buffer), DATA_DIR USERS_INDEX "alice-bob/%F", tmp);
+	strftime(buffer, sizeof(buffer), DATA_DIR "alice-bob/%F", tmp);
 	assert( createConversation("bob", "alice") == 1 );
 	assert( file_exists(buffer) == 1  );
 }

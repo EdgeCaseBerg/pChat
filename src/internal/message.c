@@ -51,7 +51,7 @@ int createConversation(const char * userA, const char * userB){
 		return 1;
 	}
 
-	FILE *fp = fopen(fileName, "r");
+	FILE *fp = fopen(fileName, "a");
 	if(!fp){
 		fprintf(stderr, "%s %s\n", FAILED_FILE_CREATION, fileName);
 		return 0;
