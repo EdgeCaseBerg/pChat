@@ -126,7 +126,7 @@ int updateConversation(const char * userA, const char * userB, const char * adde
 		return 0;
 	}
 
-	fprintf(stderr, "%s\n", addendum);
+	fprintf(fp, "%s\n", addendum);
 	fflush(fp);
 	fclose(fp);
 	return 1;
