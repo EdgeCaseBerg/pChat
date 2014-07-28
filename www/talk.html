@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+	<head>
+		<title>P. Chat</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="Simple application to chat with a known user, created to talk with my girlfriend" />
+		<meta name="author" content="Ethan Eldridge">
+		<meta name="keywords" content="Ethan,Eldridge,Joachim,Programming,PCI,private,chat,secure"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="/main.css">
+	</head>
+	<body id="talk">
+		<header>
+			<h1>Private Chat</h1>
+		</header>
+		<dival>
+			<p>
+	Private Chat lets you talk to someone else using the system,
+	simply choose their name from the drop down to load your conversation
+	and use the form to chat.
+</p>
+<a href="/">Home</a>
+
+<form action="/pci/reply.cgi" method="POST">
+	<textarea required="required" placeholder="Start typing your message" name="message"></textarea>
+	<div>
+		<input type="submit" value="Message" />
+		<select name="user" required="required">
+			<option disabled selected style='display:none;'>Choose Recipient</option><!-- Populated By JS. Filter out the logged in users name --></select>
+	</div>
+</form>
+
+<div id="history"></div>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		/* Globals for use by the scripts */
+		window.pcidomain = "//www.pci.dev/pci/"
+	</script>
+</html>
