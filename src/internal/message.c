@@ -1,5 +1,43 @@
 #include "internal/message.h"
 
+/* Creates and places the file name for two user's converations into toFill. toFill is 
+ * assuming to be a buffer of BUFFER_LENGTH*3 + DATA_DIR size at least.
+*/
+static void getConversationFileName(const char * userA, const char * userB, char * toFill){
+	int order = strncmp(userA,userB,BUFFER_LENGTH-1);
+	if(order == 0) return;
+
+	char buffer[(BUFFER_LENGTH*3) + strlen(DATA_DIR)]; //*3 for safety
+	bzero(buffer, sizeof(buffer));
+	if(order < 1){
+		snprintf(buffer, sizeof(buffer), "%s%s-%s", DATA_DIR, userA, userB);
+	}else{
+		snprintf(buffer, sizeof(buffer), "%s%s-%s", DATA_DIR, userB, userA);
+	}
+
+	char timeBuffer[BUFFER_LENGTH];
+	bzero(timeBuffer, sizeof(timeBuffer));
+
+	/* pretty much exactly from strftime's man page: */
+	time_t t;
+	struct tm * tmp;
+	t = time(NULL);
+	tmp = localtime(&t);
+	if(tmp == NULL){
+		fprintf(stderr, "Failed to determine local time\n");
+		return;
+	}
+	strftime(timeBuffer, sizeof(timeBuffer), "/%F", tmp);
+
+	if(strlen(timeBuffer) + strlen(buffer) + 1 > sizeof(buffer)){
+		fprintf(stderr, "Filename too large for conversation between %s and %s\n:%s/%s\n", userA, userB, buffer, timeBuffer);
+		return;
+	}
+
+	char * fileName = strncat(buffer, timeBuffer, sizeof(buffer));
+	strncpy(toFill, fileName, sizeof(buffer));
+}
+
 static FILE * getConversationFileInMode(const char * userA, const char * userB, const char * mode){
 	int order = strncmp(userA,userB,BUFFER_LENGTH-1);
 	if(order == 0) return NULL;
@@ -130,4 +168,12 @@ int updateConversation(const char * userA, const char * userB, const char * adde
 	fflush(fp);
 	fclose(fp);
 	return 1;
+}
+
+int checkConversationModifiedAfter(const char * userA, const char * userB, time_t lastCheckedTime){
+	char buffer[(BUFFER_LENGTH*3) + strlen(DATA_DIR)];
+	bzero(buffer, sizeof(buffer));
+	getConversationFileName(userA,userB, buffer);
+	if(file_exists(buffer) == 0) return 0;
+	else return file_last_modified_after(buffer, lastCheckedTime);
 }

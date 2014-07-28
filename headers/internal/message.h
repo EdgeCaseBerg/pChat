@@ -9,7 +9,7 @@ int createConversation(const char * userA, const char * userB);
 
 int updateConversation(const char * userA, const char * userB, const char * msg);
 
-int checkConversationModified(const char * userA, const char * userB);
+int checkConversationModifiedAfter(const char * userA, const char * userB, time_t lastCheckedTime);
 
 /* Calling users responsible for fclose on File **/
 FILE * getConversationFileForReading(const char * userA, const char * userB);
