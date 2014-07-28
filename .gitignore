@@ -13,3 +13,6 @@ headers/config.h
 
 #ignore the PCI Data directory
 data
+
+#ignore the error log from apache
+error.log
