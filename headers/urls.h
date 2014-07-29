@@ -7,6 +7,7 @@
 	#define LOGIN BASE_URL "/login.html"
 	#define BAD_LOGIN BASE_URL "/bad-login.html"
 	#define APPLICATION BASE_URL "/talk.html"
+	#define BAD_TALK BASE_URL "/bad-talk.html"
 	#define REGISTER BASE_URL "/register.html"
 	#define BAD_REGISTER BASE_URL "/bad-register.html"
 	
