@@ -17,26 +17,11 @@ int main(void){
     
     char *name  = req->getstr(req, "username", true);
     if(name == NULL){
-        qcgires_redirect(req, BAD_REGISTER);
+        qcgires_redirect(req, BAD_LOGIN);
         goto end;
     }
 
-    char *admin = req->getstr(req, "adminpassword", true);
-    if(admin == NULL){
-    	qcgires_redirect(req, BAD_REGISTER);
-    	free(name);
-    	goto end;
-    }
-
-    if(strncmp(admin, ADMIN_SECRET, strlen(ADMIN_SECRET)) != 0){
-    	fprintf(stderr, "%s%s\n", "Invalid Registration Attempt: ", admin);
-    	qcgires_redirect(req, BAD_REGISTER);
-    	free(name);
-    	free(admin);
-    	goto end;
-    }
-
-    if( create_user(name) == 1 ){   	
+    if( user_exists(name) == 1 ){   	
     	/* Log the User in */
     	qentry_t *sess = NULL;
 		sess = qcgisess_init(req, NULL);
@@ -48,12 +33,10 @@ int main(void){
         } 
         qcgires_redirect(req, APPLICATION);
     }else{
-    	fprintf(stderr, "%s%s\n", "Could not create user: ", name);
-    	qcgires_redirect(req, BAD_REGISTER);
+    	fprintf(stderr, "%s%s\n", "Could not login user: ", name);
+    	qcgires_redirect(req, BAD_LOGIN);
     }
-
     free(name);
-    free(admin);
 
     end:
     qcgires_setcontenttype(req, "text/html");
