@@ -30,16 +30,14 @@ jQuery( document ).ready(function( $ ) {
 			beforeSend: function(xhr){
 				xhr.withCredentials = true
 			},
-			url: getConversation + "?target="+$('select[name="user"]').val() + "&date=" + lastChecked.getTime(),
+			url: getConversation + "?target="+$('select[name="user"]').val() + "&date=" + lastChecked.getTime()/1000,
 			success: function(response){
 				console.info("Last conversation retrieved at: " + lastChecked)
 				lastChecked = new Date()
 				$('#history').html(response.text)
 				getNew = false
 			}
-		})
-
-		timeout = setTimeout(pollServer, period)
+		})		
 	}
 
 	var pollServer = function(){
@@ -48,7 +46,7 @@ jQuery( document ).ready(function( $ ) {
 			beforeSend: function(xhr){
 				xhr.withCredentials = true
 			},
-			url: pollConversation + "?target=" + $('select[name="user"]').val() + "&date=" + lastChecked.getTime(),
+			url: pollConversation + "?target=" + $('select[name="user"]').val() + "&date=" + lastChecked.getTime()/1000,
 			success: function(response){
 				console.info("Polling server at: " + lastChecked)
 				lastChecked = new Date()
@@ -56,6 +54,7 @@ jQuery( document ).ready(function( $ ) {
 				loadConversation()				
 			}
 		})
+		timeout = setTimeout(pollServer, period)
 	}
 
 	$('select').on('change', function(evt){

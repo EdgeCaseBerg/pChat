@@ -43,7 +43,6 @@ int main(void){
     }
 
     time_t lastChecked = (time_t)req->getint(req, "date");
-    fprintf(stderr, "lastChecked %zu\n", lastChecked);
     int updated = checkConversationModifiedAfter(username, target, lastChecked);
     printUpdated(updated);
     
