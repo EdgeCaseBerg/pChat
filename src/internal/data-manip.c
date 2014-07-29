@@ -73,6 +73,14 @@ int create_users_file(){
 	return userFileExists;
 }
 
+FILE * getUsersFile(){
+	int userFileExists = file_exists(DATA_DIR USERS_INDEX);
+	if(userFileExists == 0) return NULL;
+
+	FILE * fp = fopen(DATA_DIR USERS_INDEX, "r");
+	return fp;
+}
+
 int pci_init(){
 	return create_users_file();
 }

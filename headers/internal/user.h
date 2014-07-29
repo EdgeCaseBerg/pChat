@@ -10,4 +10,6 @@ int create_user(const char * username);
 /* 1 for user exists, 0 for does not or file could not be opened */
 int user_exists(const char * username);
 
+FILE * getUsersFile();
+
 #endif
