@@ -139,7 +139,18 @@ int updateConversation(const char * userA, const char * userB, const char * adde
 		return 0;
 	}
 
-	fprintf(fp, "%s\n", addendum);
+	time_t t;
+	struct tm * tmp;
+	t = time(NULL);
+	tmp = localtime(&t);
+	if(tmp == NULL){
+		fprintf(stderr, "Failed to determine local time\n");
+		return 0;
+	}
+	char timeBuffer[30];
+	bzero(timeBuffer, sizeof(timeBuffer));
+	strftime(timeBuffer, sizeof(timeBuffer), "%F %I:%M", tmp);
+	fprintf(fp, "[%s %s]: %s\n", timeBuffer , userA ,addendum);
 	fflush(fp);
 	fclose(fp);
 	return 1;

@@ -65,6 +65,7 @@ jQuery( document ).ready(function( $ ) {
 				console.info("Submitted Form for chat")
 				$(this).find('textarea').val("")
 				$(this).fadeIn()
+				$(this).find('textarea').focus()
 			}
 	 	})
 	 	return false
