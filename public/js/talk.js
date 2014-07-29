@@ -34,7 +34,8 @@ jQuery( document ).ready(function( $ ) {
 			success: function(response){
 				console.info("Last conversation retrieved at: " + lastChecked)
 				lastChecked = new Date()
-				$('#history').html(response.text)
+				var t = response.text.split(/(?=<br\/>)/).reverse().join("")
+				$('#history').html(t) //WAH I'm all like WAH open to injection
 				getNew = false
 			}
 		})		
