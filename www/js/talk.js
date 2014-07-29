@@ -1,6 +1,7 @@
 jQuery( document ).ready(function( $ ) {
 	var listUsers = window.pcidomain + "list-user.cgi"
 	var getConversation = window.pcidomain + "conversation.cgi"
+	var pollConversation = window.pcidomain + "poll.cgi"
 
 	$.ajax({
 		type: "GET",
@@ -20,7 +21,10 @@ jQuery( document ).ready(function( $ ) {
 	var timeout = null
 	var user = null
 	var lastChecked = new Date();
+	var getNew = true
 	var loadConversation = function(){
+		if(!getNew) return;
+
 		$.ajax({
 			type: "GET",
 			beforeSend: function(xhr){
@@ -31,17 +35,35 @@ jQuery( document ).ready(function( $ ) {
 				console.info("Last conversation retrieved at: " + lastChecked)
 				lastChecked = new Date()
 				$('#history').html(response.text)
+				getNew = false
 			}
 		})
 
-		timeout = setTimeout(loadConversation, period)
+		timeout = setTimeout(pollServer, period)
+	}
+
+	var pollServer = function(){
+		$.ajax({
+			type: "GET",
+			beforeSend: function(xhr){
+				xhr.withCredentials = true
+			},
+			url: pollConversation + "?target=" + $('select[name="user"]').val() + "&date=" + lastChecked.getTime(),
+			success: function(response){
+				console.info("Polling server at: " + lastChecked)
+				lastChecked = new Date()
+				getNew = response.updated
+				loadConversation()				
+			}
+		})
 	}
 
 	$('select').on('change', function(evt){
+		loadConversation()
 		if(timeout != null){
 			clearTimeout(timeout)
 		}
-		timeout = setTimeout(loadConversation, period)
+		timeout = setTimeout(pollServer, period)
 	})
 
 	/* In order to facilate a more user friendly interface, submit the forms
@@ -65,6 +87,7 @@ jQuery( document ).ready(function( $ ) {
 				console.info("Submitted Form for chat")
 				$(this).find('textarea').val("")
 				$(this).fadeIn()
+				$(this).find('textarea').focus()
 			}
 	 	})
 	 	return false
