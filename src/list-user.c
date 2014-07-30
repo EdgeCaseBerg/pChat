@@ -23,10 +23,9 @@ int main(void){
     if(fp){
     	char user[BUFFER_LENGTH];
     	int i = 0;
-    	while(fscanf(fp, "%" TOSTR(BUFFER_LENGTH) "s\r\n", user) == 1){
-    		if(i > 0) printf(",");
+    	while(fscanf(fp, "%" TOSTR(BUFFER_LENGTH) "s\r\n", user) == 1){    		
     		if(username == NULL || strncmp(user, username, BUFFER_LENGTH) != 0){
-    			fprintf(stderr, "%s == %s \n", user, username);
+                if(i > 0) printf(",");
     			printf("\"%s\"", user);
                 i++;
     		}
