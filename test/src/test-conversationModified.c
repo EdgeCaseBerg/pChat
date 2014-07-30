@@ -20,7 +20,7 @@ int main(){
 
 	char buffer[512];
 	bzero(buffer, sizeof(buffer));
-	strftime(buffer, sizeof(buffer), DATA_DIR "alice-bob/%F", tmp);
+	strftime(buffer, sizeof(buffer), DATA_DIR "alice-bob/%F.txt", tmp);
 	assert( updateConversation("bob", "alice", TESTTEXT) == 1 );
 	sleep(1);
 	assert( file_exists(buffer) == 1  );

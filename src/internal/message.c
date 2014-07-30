@@ -27,7 +27,7 @@ static void getConversationFileName(const char * userA, const char * userB, char
 		fprintf(stderr, "Failed to determine local time\n");
 		return;
 	}
-	strftime(timeBuffer, sizeof(timeBuffer), "/%F", tmp);
+	strftime(timeBuffer, sizeof(timeBuffer), "/%F.txt", tmp);
 
 	if(strlen(timeBuffer) + strlen(buffer) + 1 > sizeof(buffer)){
 		fprintf(stderr, "Filename too large for conversation between %s and %s\n:%s/%s\n", userA, userB, buffer, timeBuffer);
@@ -107,7 +107,7 @@ int createConversation(const char * userA, const char * userB){
 		fprintf(stderr, "Failed to determine local time\n");
 		return 0;
 	}
-	strftime(timeBuffer, sizeof(timeBuffer), "/%F", tmp);
+	strftime(timeBuffer, sizeof(timeBuffer), "/%F.txt", tmp);
 
 	if(strlen(timeBuffer) + strlen(buffer) + 1 > sizeof(buffer)){
 		fprintf(stderr, "Filename too large for conversation between %s and %s\n:%s/%s\n", userA, userB, buffer, timeBuffer);
