@@ -35,19 +35,21 @@ int main(void){
         goto end;
     }
 
-    int exists = createConversation(name, target);
-    if(exists == 0){
-        printf("%s%s%s","\"Could not open conversation with user: ", target,"\"}");
-        free(target);
+    char * filename = req->getstr(req, "f", true);
+    if(filename == NULL){
+        printf("\"You must choose a file to read\"}");
         free(name);
+        free(target);
         goto end;
     }
 
-    FILE * fp = getConversationFileForReading(name,target);
+
+    FILE * fp = getConversationByFileName(name, target, filename);
     if(fp == NULL){
         free(name);
         printf("%s%s%s","\"Could not open conversation with user for reading: ", target,"\"}");
         free(target);
+        free(filename);
         goto end;
     }
 
@@ -63,6 +65,7 @@ int main(void){
     fclose(fp);
 
     printf("\"}");
+    free(filename);
     free(target);
     free(name);
     end:

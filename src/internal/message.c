@@ -191,3 +191,29 @@ DIR * findConversationsWithUser(const char * userA, const char * userB){
 	}
 	return d; //caller responsible for calling closedir
 }
+
+FILE * getConversationByFileName(const char * userA, const char * userB, const char * fileName){
+	int order = strncmp(userA,userB,BUFFER_LENGTH-1);
+	if(order == 0) return NULL;
+
+	char buffer[(BUFFER_LENGTH*4) + strlen(DATA_DIR)]; 
+	bzero(buffer, sizeof(buffer));
+	if(order < 1){
+		snprintf(buffer, sizeof(buffer), "%s%s-%s/%s", DATA_DIR, userA, userB, fileName);
+	}else{
+		snprintf(buffer, sizeof(buffer), "%s%s-%s/%s", DATA_DIR, userB, userA, fileName);
+	}
+
+	if(strlen(buffer) <= 0){
+		fprintf(stderr, "%s\n", "Failed to compute filename");
+		return NULL;
+	}
+
+	if(file_exists(buffer) == 0){
+		fprintf(stderr, "%s %s\n", FAILED_FILE_EXISTS, buffer);
+		return NULL;
+	}
+
+	return fopen(buffer, "r");
+
+}

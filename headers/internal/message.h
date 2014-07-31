@@ -17,8 +17,10 @@ int checkConversationModifiedAfter(const char * userA, const char * userB, time_
 /* Calling users responsible for fclose on File **/
 FILE * getConversationFileForReading(const char * userA, const char * userB);
 FILE * getConversationFileForWriting(const char * userA, const char * userB);
+FILE * getConversationByFileName(const char * userA, const char * userB, const char * fileName);
 
 /* Caller resposible for calling closedir on Directory, returns NULL if cant open */
 DIR * findConversationsWithUser(const char * userA, const char * userB);
  
+
 #endif

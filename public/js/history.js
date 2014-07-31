@@ -1,6 +1,7 @@
 jQuery( document ).ready(function( $ ) {
 	var listUsers = window.pcidomain + "list-user.cgi"
 	var getConversations = window.pcidomain + "conversations-with-user.cgi"
+	var getFile = window.pcidomain + "history-for-file.cgi"
 	
 	$.ajax({
 		type: "GET",
@@ -34,6 +35,18 @@ jQuery( document ).ready(function( $ ) {
 					$('#history-list').append($("<li>"+cName+"</li>"))
 				};
 
+			}
+		})
+	})
+	$('#history-list').on('click', 'li', function(){
+		$.ajax({
+			type: "GET",
+			beforeSend: function(xhr){
+				xhr.withCredentials = true
+			},
+			url: getFile + "?target=" + $('select[name="user"]').val() + "&f=" + $(this).text(),
+			success: function(obj){
+				$('textarea').html( obj.text.replace(/<br\/>/g,"\n") )
 			}
 		})
 	})
