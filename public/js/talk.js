@@ -55,7 +55,7 @@ jQuery( document ).ready(function( $ ) {
 				titleToggleTimeout = setTimeout(toggleTitle, togglePeriod)
 				//console.info("Last conversation retrieved at: " + lastChecked)
 				lastChecked = new Date()
-				var t = response.text.split(/(?=<br\/>)/).reverse().join("")
+				var t = response.text.split(/(?=<br\/>)/g).reverse().join("")
 				$('#conversation').html(t) //WAH I'm all like WAH open to injection
 				getNew = false
 			}
