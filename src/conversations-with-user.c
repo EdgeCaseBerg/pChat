@@ -39,7 +39,7 @@ int main(void){
     printf("\"conversations\" : [ ");
     /* Now retrieve the conversations with the target between themselves and the user */
     DIR * d;
-    d = findConversationsWithUser("bob", "alice");
+    d = findConversationsWithUser(name, target);
 
     if(d != NULL){
         int i = 0;
