@@ -4,6 +4,7 @@
 /* Internal Errors. */
 #define FAILED_INIT "Could not run init for Private Chat. "
 #define FAILED_DIR_EXISTS "Directory does not exist: "
+#define FAILED_DIR_OPEN "Directory could not be opened: "
 #define FAILED_DIR_CREATION "Could not create directory: "
 #define FAILED_FILE_EXISTS "File does not exist: "
 #define FAILED_FILE_CREATION "Could not create file: "

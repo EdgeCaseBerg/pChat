@@ -164,3 +164,30 @@ int checkConversationModifiedAfter(const char * userA, const char * userB, time_
 	if(file_exists(buffer) == 0) return 0;
 	else return file_last_modified_after(buffer, lastCheckedTime);
 }
+
+DIR * findConversationsWithUser(const char * userA, const char * userB){
+	int order = strncmp(userA,userB,BUFFER_LENGTH-1);
+	if(order == 0) return NULL; //You can't talk to yourself.
+
+	char buffer[(BUFFER_LENGTH*3) + strlen(DATA_DIR)]; //*3 for safety
+	bzero(buffer, sizeof(buffer));
+	if(order < 1){
+		snprintf(buffer, sizeof(buffer), "%s%s-%s", DATA_DIR, userA, userB);
+	}else{
+		snprintf(buffer, sizeof(buffer), "%s%s-%s", DATA_DIR, userB, userA);
+	}
+
+	int existsAlready = directory_exists(buffer);
+	if(existsAlready != 1){
+		fprintf(stderr, "Directory does not exist for conversations between User: %s and User: %s\n", userA, userB);
+		return NULL;
+	}
+
+	DIR *d = NULL;
+	d = opendir(buffer);
+	if(!d){
+		fprintf(stderr, "%s %s\n", FAILED_DIR_OPEN, buffer);
+		return NULL;
+	}
+	return d; //caller responsible for calling closedir
+}
