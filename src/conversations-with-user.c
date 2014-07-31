@@ -38,7 +38,23 @@ int main(void){
     
     printf("\"conversations\" : [ ");
     /* Now retrieve the conversations with the target between themselves and the user */
+    DIR * d;
+    d = findConversationsWithUser("bob", "alice");
 
+    if(d != NULL){
+        int i = 0;
+        struct dirent *dir;
+        while ((dir = readdir(d)) != NULL){
+            if(dir->d_type == DT_REG){
+                if(i > 0) printf(",");
+                //note no escaping so if someone has a " in their name they dont 
+                //get to have history. Tough.
+                printf("\"%s\"",  dir->d_name);
+                i++;
+            }
+        }
+        closedir(d);
+    }
 
     printf(" ]}");
     free(name);
