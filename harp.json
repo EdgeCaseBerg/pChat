@@ -3,7 +3,7 @@
 		"sitename" : "Private Chat",
 		"title" : "P. Chat",
 		"description" : "Simple application to chat with a known user, created to talk with my girlfriend",
-		"pcidomain" : "//www.privateTalk.ethanjoachimeldridge.info/pci/"
+		"pcidomain" : "//privateTalk.ethanjoachimeldridge.info/pci/"
 	}
 }
 
