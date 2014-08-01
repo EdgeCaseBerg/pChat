@@ -110,6 +110,9 @@ definition pointing to`127.0.0.1`
     create-user.c -> cgi script to handle POST to create account
     list-user.c -> cgi script to list users for message selection
     reply.c -> cgi script to update or create a conversation between users
+    conversations-with-user.c -> cgi script to view a list of conversations with a user
+    history-for-file.c -> cgi script to retrieve history between 2 users for a given day
+    poll.c -> cgi script responsible for polling the server for any chat changes
     login.c
     register.c
 
@@ -121,8 +124,10 @@ definition pointing to`127.0.0.1`
 	login -> login to the system
 	register -> register a user on the system
 	talk -> have a conversation with someone
+	history -> view previous conversations with people
 
-	... more to come (js)
+	talk.js -> main functionality for chatting,polling, and the core of the user experience
+	history.js -> script that faciliates browsing your chat history with users
 
 [qdecoder]:http://www.qdecoder.org/wiki/qdecoder
 [listed here]:http://cgi.resourceindex.com/programs_and_scripts/c_and_c++/libraries_and_classes/
