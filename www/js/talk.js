@@ -26,9 +26,10 @@ jQuery( document ).ready(function( $ ) {
 	var toggleMax = 100
 	var titleToggleTimeout = null
 	var togglePeriod = 1000
+	var userSentMessage = false
 
 	var toggleTitle = function(){
-		if(titleToggle < toggleMax){
+		if(titleToggle < toggleMax && !userSentMessage){
 			if(titleToggle % 2 == 0) document.title = "New Message | P. Chat"
 			else document.title = "P. Chat"
 			titleToggle++
@@ -38,6 +39,7 @@ jQuery( document ).ready(function( $ ) {
 			if(titleToggleTimeout){
 				clearTimeout(titleToggleTimeout)
 			}
+			userSentMessage = false
 		}
 	}
 
@@ -107,6 +109,7 @@ jQuery( document ).ready(function( $ ) {
 	 		type: method,
 	 		beforeSend: function(xhr){
 				xhr.withCredentials = true
+				userSentMessage = true
 			},
 			data: data,
 			url: url,
