@@ -29,7 +29,7 @@ jQuery( document ).ready(function( $ ) {
 	var userSentMessage = false
 
 	var toggleTitle = function(){
-		if(titleToggle < toggleMax && !userSentMessage){
+		if(titleToggle < toggleMax){
 			if(titleToggle % 2 == 0) document.title = "New Message | P. Chat"
 			else document.title = "P. Chat"
 			titleToggle++
@@ -54,7 +54,10 @@ jQuery( document ).ready(function( $ ) {
 			url: getConversation + "?target="+$('select[name="user"]').val() + "&date=" + lastChecked.getTime()/1000,
 			success: function(response){
 				titleToggle = 0
-				titleToggleTimeout = setTimeout(toggleTitle, togglePeriod)
+				if(!userSentMessage){
+					titleToggleTimeout = setTimeout(toggleTitle, togglePeriod)
+				}
+				userSentMessage = false
 				//console.info("Last conversation retrieved at: " + lastChecked)
 				lastChecked = new Date()
 				var t = response.text.split(/(?=<br\/>)/g).reverse().join("")
