@@ -57,6 +57,7 @@ int main(void){
     while( (cOrEOF = fgetc(fp)) != EOF){
         c = (char)cOrEOF;
         if(c == '"') printf("\\%c", c);
+        else if(c == '\r') continue;
         else if(c == '\n') printf("<br/>");
         else printf("%c", c);
     }
