@@ -30,7 +30,7 @@ jQuery( document ).ready(function( $ ) {
 					return
 				}
 				$('#history-list').html("") //Clear out the 'choose a user'
-				obj.conversations = obj.conversations.sort().reverse()				
+				obj.conversations = obj.conversations.sort()
 				for (var i = obj.conversations.length - 1; i >= 0; i--) {
 					var cName = obj.conversations[i]
 					$('#history-list').append($("<li>"+cName+"</li>"))
